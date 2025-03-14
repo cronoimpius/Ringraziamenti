@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaos with Predictable Filenames</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: white; /* Always white background */
+            color: black;
+            text-align: center;
+        }
+        .chaos-element {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: shakeAndGrow 1s infinite;
+            pointer-events: none; /* Disable interaction */
+            background-color: transparent; /* Transparent background for pop-ups */
+            overflow: hidden; /* Ensure images/GIFs fit within bounds */
+        }
+        @keyframes shakeAndGrow {
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-10px, -10px) scale(1.1); }
+            50% { transform: translate(10px, 10px) scale(0.9); }
+            75% { transform: translate(5px, -5px) scale(1.05); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        #message {
+            display: none; /* Hidden initially */
+            font-size: 72px;
+            margin-top: 50px;
+            text-align: center;
+            color: black; /* Text color matches white background */
+        }
+        #final-text {
+            display: none; /* Hidden initially */
+            font-size: 24px;
+            margin-top: 20px;
+            color: black;
+        }
+        #final-paragraph {
+            display: none; /* Hidden initially */
+            font-size: 20px;
+            margin-top: 20px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="message">TADA!</h1>
+    <p id="final-text">Here's what just happened:</p>
+    <p id="final-paragraph"></p>
+    <div id="chaos-container"></div>
+
+    <script>
+        const chaosContainer = document.getElementById('chaos-container');
+        const messageElement = document.getElementById('message');
+        const finalTextElement = document.getElementById('final-text');
+        const finalParagraphElement = document.getElementById('final-paragraph');
+
+        let startTime = null;
+
+        // Dynamically generate the list of images/GIFs (1 to 50)
+        const localImages = [];
+        for (let i = 1; i <= 50; i++) {
+            localImages.push(`images/${i}.jpg`); // Add JPG files
+            localImages.push(`images/${i}.gif`); // Add GIF files
+        }
+
+        // Function to get a random image from the generated list
+        function getRandomImage() {
+            return localImages[Math.floor(Math.random() * localImages.length)];
+        }
+
+        function generateChaosElement() {
+            const imgSrc = getRandomImage();
+            const element = document.createElement('div');
+            element.className = 'chaos-element';
+
+            // Random size
+            const width = Math.floor(Math.random() * (300 - 150 + 1)) + 150; // Random width between 150px and 300px
+            const height = Math.floor(Math.random() * (300 - 150 + 1)) + 150; // Random height between 150px and 300px
+            element.style.width = `${width}px`;
+            element.style.height = `${height}px`;
+
+            // Random position
+            const left = Math.random() * (window.innerWidth - width);
+            const top = Math.random() * (window.innerHeight - height);
+            element.style.left = `${left}px`;
+            element.style.top = `${top}px`;
+
+            // Add image/GIF
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            element.appendChild(img);
+
+            // Append to container
+            chaosContainer.appendChild(element);
+        }
+
+        function startChaos() {
+            if (!startTime) {
+                startTime = Date.now();
+            }
+
+            const elapsedTime = Date.now() - startTime;
+
+            if (elapsedTime < 20000) { // Continue for 20 seconds
+                generateChaosElement();
+                setTimeout(startChaos, 100); // Generate a new element every 100ms
+            } else {
+                // Stop chaos and show the message
+                chaosContainer.innerHTML = ''; // Clear all chaos elements
+                messageElement.style.display = 'block';
+                finalTextElement.style.display = 'block';
+                finalParagraphElement.style.display = 'block';
+
+                // Dynamically create a paragraph summarizing the experience
+                finalParagraphElement.textContent = `
+                    The chaos has ended! During the last 20 seconds, your screen was filled with random images and GIFs
+                    named from 1.jpg/gif to 50.jpg/gif. It was overwhelming, but now it's over... for now.
+                `;
+
+                console.log("Chaos has stopped!");
+            }
+        }
+
+        // Start chaos immediately when the page loads
+        window.onload = () => {
+            startChaos();
+        };
+    </script>
+</body>
+</html>
