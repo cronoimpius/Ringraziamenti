@@ -113,9 +113,9 @@
 
         let startTime = null;
 
-        // Dynamically generate the list of images/GIFs (1 to 50)
+        // List of Imgur direct links for files
         const sharedFiles = [
-    "https://i.imgur.com/COqFCTX.gifv",
+            "https://i.imgur.com/COqFCTX.gifv",
     "https://i.imgur.com/0kBsw2N.gifv",
     "https://i.imgur.com/Vs9iZ3c.jpg",
     "https://i.imgur.com/gbDPFcd.jpg",
@@ -214,17 +214,17 @@
     "https://i.imgur.com/Q08kAhq.gifv",
     "https://i.imgur.com/bNpbazk.gifv",
     "https://i.imgur.com/pqBgi0S.gifv",
-    "https://i.imgur.com/hyDehWR.gifv"
-            // Add more Google Drive links here
+    "https://i.imgur.com/hyDehWR.gifv"// Replace with actual Imgur direct links
+            // Add more Imgur links here
         ];
 
-        // Function to get a random image from the generated list
-         function getRandomFile() {
+        // Function to get a random file from the generated list
+        function getRandomFile() {
             return sharedFiles[Math.floor(Math.random() * sharedFiles.length)];
         }
 
         function generateChaosElement() {
-            const imgSrc = getRandomImage();
+            const fileSrc = getRandomFile();
             const element = document.createElement('div');
             element.className = 'chaos-element';
 
@@ -240,12 +240,18 @@
             element.style.left = `${left}px`;
             element.style.top = `${top}px`;
 
-            // Add image/GIF
+            // Add image or GIF
             const img = document.createElement('img');
-            img.src = imgSrc;
+            img.src = fileSrc;
             img.style.width = '100%';
             img.style.height = '100%';
             img.style.objectFit = 'cover';
+
+            // Debugging: Log errors if the image fails to load
+            img.onerror = () => {
+                console.error(`Failed to load image: ${fileSrc}`);
+            };
+
             element.appendChild(img);
 
             // Append to container
