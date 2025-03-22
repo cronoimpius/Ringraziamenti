@@ -32,6 +32,19 @@
             75% { transform: translate(5px, -5px) scale(1.05); }
             100% { transform: translate(0, 0) scale(1); }
         }
+        /* Scrollable container for final text */
+        #text-container {
+            display: none; /* Hidden initially */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70%; /* Half of the screen height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            box-sizing: border-box;
+            text-align: center;
+        }
         #message {
             display: none; /* Hidden initially */
             font-size: 72px;
@@ -61,7 +74,9 @@
 <body>
     <h1 id="message">Eccoci qua!</h1>
     <h2 id="final-text">I Ringraziamenti</h2> <!-- Title -->
-    <div id="final-paragraph" >Parto col Ringraziare i miei genitori, mio fratello e la mia famiglia in generale <br />
+    <div id="text-container">
+        <div id="final-paragraph">
+        Parto col Ringraziare i miei genitori, mio fratello e la mia famiglia in generale <br />
     per il supporto durante questi anni, sia nei momenti difficili che in quelli più gioiosi come oggi. <br />
     (Anche quando il mio carattere non aiutava.)<br /><br />
 
@@ -85,7 +100,7 @@
     <i>Grazie a tutti!</i><br /><br />
 
     P.S. Per vedere la lista completa di nomi clickare <a href="https://cronoimpius.github.io/Ringraziamenti/">qua</a>
-
+  </div>
 </div>
     <div id="chaos-container"></div>
 
@@ -94,15 +109,18 @@
         const messageElement = document.getElementById('message');
         const finalTextElement = document.getElementById('final-text');
         const finalParagraphElement = document.getElementById('final-paragraph');
+        const textContainer = document.getElementById('text-container');
 
         let startTime = null;
 
         // Dynamically generate the list of images/GIFs (1 to 50)
-        const localImages = [];
-        for (let i = 1; i <= 50; i++) {
-            localImages.push(`images/${i}.jpg`); // Add JPG files
-            localImages.push(`images/${i}.gif`); // Add GIF files
-        }
+        const sharedFiles = [
+            "https://drive.google.com/file/d/1noJ2ecKmvqJtY7IdNCeybg2jsQdgIVMq/view?usp=sharing", // Replace with actual file IDs
+            "https://drive.google.com/file/d/1KDnBDtEnaDWhOkAWixfFE3Py2XkyN7_N/view?usp=sharing",
+            "https://drive.google.com/file/d/12HWzSts_MMu6maJC78vYQJqkgNHv_HVp/view?usp=sharing",
+            "https://drive.google.com/file/d/1AtZkW6Jomf4US5FHSp-na9ptrFAsFDeS/view?usp=sharing",
+            // Add more Google Drive links here
+        ];
 
         // Function to get a random image from the generated list
         function getRandomImage() {
@@ -154,6 +172,7 @@
                 messageElement.style.display = 'block';
                 finalTextElement.style.display = 'block';
                 finalParagraphElement.style.display = 'block';
+                textContainer.style.display = 'block';
 
                 console.log("Chaos has stopped!");
             }
