@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaos with Predictable Filenames</title>
+    <title>Ringraziamenti</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -41,22 +41,52 @@
         }
         #final-text {
             display: none; /* Hidden initially */
-            font-size: 24px;
+            font-family: 'Verdana', sans-serif; /* Use Verdana font */
+            font-size: 36px;
             margin-top: 20px;
             color: black;
+            text-align: center;
         }
         #final-paragraph {
             display: none; /* Hidden initially */
-            font-size: 20px;
+            font-family: 'Verdana', sans-serif; /* Use Verdana font */
+            font-size: 24px;
             margin-top: 20px;
             color: black;
+            text-align: center;
+            overflow: auto;
         }
     </style>
 </head>
 <body>
-    <h1 id="message">TADA!</h1>
-    <p id="final-text">Here's what just happened:</p>
-    <p id="final-paragraph"></p>
+    <h1 id="message">Eccoci qua!</h1>
+    <h2 id="final-text">I Ringraziamenti</h2> <!-- Title -->
+    <div id="final-paragraph" >Parto col Ringraziare i miei genitori, mio fratello e la mia famiglia in generale <br />
+    per il supporto durante questi anni, sia nei momenti difficili che in quelli più gioiosi come oggi. <br />
+    (Anche quando il mio carattere non aiutava.)<br /><br />
+
+    Proseguo col ringraziare tutti i miei amici:<br />
+    Quelli che mi porto dietro da una vita, che mi hanno sempre supportato ed aiutato ad affrontare le difficoltà <br />
+    e con cui sono cresciuto e ho passato anche attimi di svago e felicità, <br />
+    e quelli che ho scoperto durante questo percorso, con cui ho condiviso vari momenti di convivialità e gioia.<br /><br />
+
+    Ringrazio anche i miei colleghi d'ing con cui ho scambiato battute tra una lezione <br />
+    e la preparazione degli esami<br />
+    e da cui ho appreso tanto a livello di conoscenze.<br /><br />
+
+    Infine ringrazio i miei colleghi di lavoro, <br />
+    con i quali ho condiviso questi ultimi mesi e che<br />
+    mi hanno trasmesso un nuovo modo di vedere il mondo.<br /><br />
+
+    Non posso non terminare con una menzione d'onore a mia nonna che è sempre la nostra roccia,  <br />
+    che con un racconto, una parola o un'espressione riesce ad aggiustare tutto<br />
+    e che mi ha aiutato a diventare quello che sono. <br /><br />
+
+    <i>Grazie a tutti!</i><br /><br />
+
+    P.S. Per vedere la lista completa di nomi clickare <a href="https://cronoimpius.github.io/Ringraziamenti/">qua</a>
+
+</div>
     <div id="chaos-container"></div>
 
     <script>
@@ -124,12 +154,6 @@
                 messageElement.style.display = 'block';
                 finalTextElement.style.display = 'block';
                 finalParagraphElement.style.display = 'block';
-
-                // Dynamically create a paragraph summarizing the experience
-                finalParagraphElement.textContent = `
-                    The chaos has ended! During the last 20 seconds, your screen was filled with random images and GIFs
-                    named from 1.jpg/gif to 50.jpg/gif. It was overwhelming, but now it's over... for now.
-                `;
 
                 console.log("Chaos has stopped!");
             }
